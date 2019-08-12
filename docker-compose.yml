@@ -7,6 +7,17 @@ services:
       context: blog
       dockerfile: Dockerfile
     command: php artisan serve --host 0.0.0.0
-    working_dir: "/root/test/blog"
+    volumes:
+      - "./blog:/root/test/blog"
     ports:
-      - "8000:8000"
+      - "80:8000"
+
+  mysql:
+    image: "mysql:5.7.27"
+    environment:
+      MYSQL_ROOT_PASSWORD: "admin"
+      MYSQL_PASSWORD: "admin"
+      MYSQL_USER: "homestead"
+      MYSQL_DATABASE: "homestead"
+    ports:
+      - "3306:3306"

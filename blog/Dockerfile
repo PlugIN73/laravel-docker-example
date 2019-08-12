@@ -19,15 +19,11 @@ RUN curl -sS --insecure https://www.dotdeb.org/dotdeb.gpg | apt-key add -
 RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     libzip-dev
-RUN docker-php-ext-install zip
+RUN docker-php-ext-install zip pdo_mysql
 
 RUN composer global require laravel/installer
 
+RUN mkdir -p /root/test/blog
 WORKDIR /root/test/blog
-
-FROM node
-
-RUN node --version
-
 
 COPY . .
